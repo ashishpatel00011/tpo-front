@@ -1,0 +1,88 @@
+.mainhome {
+  min-height: 600px;
+}
+
+.home {
+  display: flex;
+}
+
+/* Sidebar styles */
+.sidebar-container {
+  width: 25%;
+}
+
+.content {
+  width: 70%;
+}
+
+/* Menu button styles */
+.menu-button {
+  display: none; /* Hidden by default for desktop */
+  width: 100%;
+  text-align: left;
+  z-index: 60; 
+}
+
+.menu-button span {
+  margin-left: 10px;
+}
+
+/* Loading and no posts styles */
+.loading,
+.no-posts {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Reset filter button styles */
+.reset-filter {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reset-filter:hover {
+  background-color: #0056b3;
+}
+
+/* For mobile view */
+@media only screen and (max-width: 768px) {
+  .home {
+    flex-direction: column;
+  }
+
+  .sidebar-container {
+    display: none; /* Hidden by default for mobile */
+    width: 100%;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    z-index: 50;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .sidebar-container.open {
+    display: block; /* Display when open */
+  }
+
+  .menu-button {
+    display: block; /* Show menu button on mobile */
+    margin-bottom: 10px;
+  }
+
+  /* Content should always take 100% width */
+  .content {
+    width: 100%;
+  }
+}
+
+/* Further small screen adjustment */
+@media only screen and (max-width: 576px) {
+  .sidebar-container {
+    width: 100%; /* Ensure full width on smaller screens */
+  }
+}

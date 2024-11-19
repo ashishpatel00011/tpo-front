@@ -1,0 +1,126 @@
+.home22 {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+.home22-intro-title {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin: 40px 300px; 
+  color: #333;
+}
+
+.home22-intro-text {
+  margin-bottom: 2rem;
+}
+
+.para {
+  font-size: 1rem;
+  margin: 1.5rem 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3.5rem 0;
+  flex-wrap: wrap; /* Allow wrapping for small screens */
+}
+
+.links a {
+  padding: 10px 20px;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.links .reg {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 30px;
+}
+
+.links a:not(.reg) {
+  background-color: white;
+  color: #333;
+  border: 1px solid #333;
+}
+
+.links a:hover {
+  opacity: 0.8;
+}
+
+.client_logos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.client_logos img {
+  max-width: 100px;
+  height: auto;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 1024px) {
+  .home22-intro-title {
+    margin: 30px 200px; 
+  }
+}
+@media (max-width: 768px) {
+  .home22-intro-title {
+    font-size: 2.5rem;
+    margin: 30px 10px; 
+  }
+
+  .para {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 1.5rem; 
+  }
+
+  .client_logos {
+    gap: 1rem;
+    margin: 60px 0;
+
+  }
+
+  .client_logos img {
+    max-width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home22-intro-title {
+    font-size: 2rem;
+    margin: 20px 10px; /* Reduced margin */
+  }
+
+  .para {
+    font-size: 0.8rem;
+    margin: 0 10px; /* Added margin for breathing space */
+  }
+
+  .links a {
+    padding: 10px 15px; /* Smaller padding for small screens */
+    font-size: 0.9rem; /* Adjusted font size */
+  }
+
+  .client_logos img {
+    max-width: 60px;
+  }
+}

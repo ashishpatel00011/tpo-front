@@ -1,0 +1,187 @@
+.dropdown {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center; 
+}
+
+  .progress-bar-container {
+    width: 100%;
+    background-color: #e0e0e0; /* Background for the progress bar */
+    border-radius: 5px;
+    margin-top: 5px; /* Space above the progress bar */
+  }
+  
+  .progress-bar {
+    height: 5px; /* Adjust height as needed */
+    border-radius: 5px;
+    transition: width 0.3s ease; /* Smooth transition effect */
+  }
+  
+.dropbtn {
+    background-color: #26262c;
+    position: relative;
+    color: white;
+    font-weight: 600;
+    padding: 16px 20px;
+    width: 100%;
+    max-width: 85%; 
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 0 auto; /* Center the button */
+}
+.buttoncontent{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.dropbtn .dbtn{
+    display: flex;
+    gap:40px;
+    align-items: center;
+}
+.active {
+    color: red;
+}
+
+.dropbtn i {
+    transition: transform 0.2s; 
+}
+
+.dropbtn i.open {
+    transform: rotate(180deg); 
+}
+
+.dropdown-content {
+    display: block; 
+    width: 100%; /* Full width */
+    max-width: 85%; 
+    margin: 0 auto; /* Center content */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    padding: 20px;
+    transition: 2s ease-in;
+}
+
+.table-responsive {
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    margin: 0; /* Optional: Adjust margin as needed */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    border: 1px solid #ddd;
+    color: #555;
+}
+
+table .difficulty {
+    width: 10%;
+}
+/* Base styles for difficulty cells */
+.difficulty {
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+}
+
+.easy {
+    color: #27ae60; /* Green color for Easy */
+}
+
+.medium {
+    color: #f39c12; /* Orange color for Medium */
+}
+
+.hard {
+    color: #e74c3c; /* Red color for Hard */
+}
+
+table .problem {
+    width: 55%;
+}
+
+td:first-child,
+th:first-child {
+    width: 50px;
+    text-align: start;
+}
+/* Fixed width for the second child in the table */
+table td:nth-child(2),
+table th:nth-child(2) {
+    overflow: hidden; /* Hide overflow content */
+}
+
+
+td a {
+    text-decoration: none;
+    color: red;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+td input[type="checkbox"] {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+/* Difficulty Color Coding */
+td:last-child {
+    text-align: center;
+}
+
+
+/* Responsive Design */
+@media (max-width: 10240px) {
+
+    .dropbtn {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .table-responsive {
+        overflow-x: auto; 
+    }
+}
+@media (max-width: 780px) {
+table td:nth-child(2),
+table th:nth-child(2) {
+    width: 300px;
+    max-width: 300px;
+    white-space: nowrap; 
+    text-overflow: ellipsis; 
+}
+
+    .dropbtn {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .table-responsive {
+        overflow-x: auto; 
+    }
+}
+

@@ -1,0 +1,38 @@
+.posts {
+  padding-top: 0px;
+  display: flex;
+flex-direction: column;
+  margin: 20px;
+  min-height :600px; ;
+}
+
+
+.posts h1 {
+  font-size: 42px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  /* margin-left: 30%; */
+  text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .posts h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left: 5%;
+  }
+}
+
+/* Responsive Styles for Mobile */
+@media only screen and (max-width: 576px) {
+  .posts h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    margin-left:5%;
+  }
+}

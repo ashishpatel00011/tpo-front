@@ -1,0 +1,65 @@
+/* Overall table styles */
+.blind-description {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Paragraph styles */
+.blind-description p {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+/* Description padding and font-size adjustments */
+.desc {
+  padding: 0 100px;
+  font-size: 18px;
+}
+
+/* Strong tag style */
+.blind-description strong {
+  font-size: larger;
+  text-align: center;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Box alignment */
+.box {
+  text-align: center;
+}
+
+/* Media Queries for responsiveness */
+
+/* Medium screens (tablets) */
+@media (max-width: 768px) {
+  .blind-description p {
+    font-size: 30px;
+  }
+  
+  .desc {
+    padding: 0 50px;
+    font-size: 16px;
+  }
+}
+
+/* Small screens (mobile devices) */
+@media (max-width: 480px) {
+  .blind-description p {
+    font-size: 24px;
+  }
+  
+  .desc {
+    padding: 0 20px;
+    font-size: 14px;
+  }
+  
+  .blind-description strong {
+    font-size: medium;
+  }
+  
+  .box {
+    text-align: left;
+  }
+}

@@ -1,0 +1,182 @@
+.top {
+  display: flex;
+  justify-content: center;
+}
+.search {
+  width: 80%;
+  margin-bottom: 20px;
+}
+.search input {
+  width: 100%;
+  padding: 6px;
+  border-radius: 10px;
+}
+.companyfilter {
+  display: flex;
+  justify-content: center;
+  gap: 3%;
+  margin-bottom: 60px;
+}
+.companyselect {
+  padding: 5px 20px;
+  text-align: left;
+  border-radius: 10px;
+  width: 60%;
+}
+.reset-button {
+  padding: 6px 40px;
+  width: 17%;
+  border-radius: 10px;
+  background: rgb(98, 8, 8);
+  color: white;
+  cursor: pointer; /* Make it clear this is a clickable button */
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.reset-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.postlist p {
+  text-align: center;
+}
+/* post*/
+.post {
+  width: 100%;
+  margin: 20px auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 800px;
+  background-color: #ffffff;
+}
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-body {
+  background: linear-gradient(145deg, #f6f8f9, #eff2f3);
+  padding: 20px;
+}
+
+.postInfo {
+  position: relative;
+  text-align: left;
+}
+
+.postTitle {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  color: #333;
+  line-height: 1.3;
+}
+
+.postDate {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14px;
+  color: #888;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.postDesc {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.5;
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  max-height: 4.5em; /* 3 lines * 1.5 line-height */
+}
+
+.postDesc::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 25px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), #eff2f3);
+}
+
+.readMore {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 8px 15px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.readMore:hover {
+  background-color: #2980b9;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 900px) {
+  .post {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 600px) {
+  .search {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .search input {
+    width: 100%;
+  }
+  .companyfilter {
+    gap: 1%;
+  }
+  .companyselect {
+    width: 65%;
+  }
+  .reset-button {
+    padding: 6px;
+    width: 35%;
+  }
+  .post {
+    margin: 15px auto;
+  }
+
+  .card-body {
+    padding: 15px;
+  }
+
+  .postTitle {
+    font-size: 20px;
+  }
+
+  .postDate {
+    position: static;
+    display: block;
+    margin-bottom: 10px;
+    text-align: left;
+  }
+
+  .postDesc {
+    font-size: 14px;
+    -webkit-line-clamp: 2;
+  }
+
+  .readMore {
+    display: block;
+    text-align: center;
+  }
+}
