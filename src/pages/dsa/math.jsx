@@ -23,63 +23,86 @@ const Math = ({ token }) => {
     };
 
 
-    useEffect(() => {
-        async function fetchProblems() {
-            const data = await getdsa(token);
-            const filteredProblems = data.filter((problem) => problem.type === "math");
-            setProblems(filteredProblems);
-        }
-    
-        async function fetchSavedProblems() {
-            try {
-                const savedProblems = await getproblemsaved(user._id);    
-                // Filter only the saved problems for the current type
-                const filteredSavedProblems = savedProblems.filter((problemId) => 
-                    problems.some((problem) => problem._id === problemId)
-                );
-    
-                // Map the filtered saved problem IDs to true for pre-filling checkboxes
-                const savedProblemsMap = filteredSavedProblems.reduce((acc, problemId) => {
-                    acc[problemId] = true;
-                    return acc;
-                }, {});
-                setCheckedProblems(savedProblemsMap);
-            } catch (error) {
-                console.error("Error fetching saved problems:", error);
-            }
-        }
-    
-        fetchProblems().then(fetchSavedProblems); // Ensure problems are fetched before filtering saved problems
-    }, [token, user._id, problems]);
-    
 
+    useEffect(() => {
+      async function fetchProblems() {
+          try {
+              const data = await getdsa(token);
+              const filteredProblems = data.filter((problem) => problem.type === "math");
+              setProblems(filteredProblems);
+  
+              // Fetch saved problems after problems are set
+              if (user && user._id) {
+                  await fetchSavedProblems(filteredProblems);
+              } else {
+                  console.warn("User is not logged in. Skipping fetching saved problems.");
+              }
+          } catch (error) {
+              console.error("Error fetching problems:", error);
+          }
+      }
+  
+      async function fetchSavedProblems(problems) {
+          try {
+              const savedProblems = await getproblemsaved(user._id);
+  
+              // Filter only the saved problems for the current type
+              const filteredSavedProblems = savedProblems.filter((problemId) =>
+                  problems.some((problem) => problem._id === problemId)
+              );
+  
+              // Map the filtered saved problem IDs to true for pre-filling checkboxes
+              const savedProblemsMap = filteredSavedProblems.reduce((acc, problemId) => {
+                  acc[problemId] = true;
+                  return acc;
+              }, {});
+              setCheckedProblems(savedProblemsMap);
+          } catch (error) {
+              console.error("Error fetching saved problems:", error);
+          }
+      }
+  
+      // Start fetching problems
+      fetchProblems();
+  }, [token, user]); // Removed problems from dependency array
+  
     // Function to handle checkbox click for adding and deleting problems
     const handleCheckboxClick = async (userId, problemId) => {
-        if (checkedProblems[problemId]) {
-            try {
-                await Deleteproblem(userId, problemId);
-                setCheckedProblems((prevState) => ({
-                    ...prevState,
-                    [problemId]: false,
-                }));
-            } catch (error) {
-                console.error('Error deleting problem:', error);
-            }
-        } else {
-            try {
-                await Addproblem(userId, problemId);
-                setCheckedProblems((prevState) => ({
-                    ...prevState,
-                    [problemId]: true,
-                }));
-            } catch (error) {
-                console.error('Error adding problem:', error);
-            }
-        }
-    };
+      // Check if the user is logged in
+      if (!userId) {
+          alert("Please log in to save or remove problems..............");
+          return; // Exit the function early if the user is not logged in
+      }
+  
+      if (checkedProblems[problemId]) {
+          try {
+              await Deleteproblem(userId, problemId);
+              setCheckedProblems((prevState) => ({
+                  ...prevState,
+                  [problemId]: false,
+              }));
+          } catch (error) {
+              console.error("Error deleting problem:", error);
+          }
+      } else {
+          try {
+              await Addproblem(userId, problemId);
+              setCheckedProblems((prevState) => ({
+                  ...prevState,
+                  [problemId]: true,
+              }));
+          } catch (error) {
+              console.error("Error adding problem:", error);
+          }
+      }
+  };
   return (
     <div className="dropdown">
-      <button onClick={toggleDropdown} className={`dropbtn ${isOpen ? 'active' : ''}`}>
+      <button 
+        onClick={toggleDropdown} 
+        className={`dropbtn ${isOpen ? 'active' : ''}`} 
+        aria-expanded={isOpen}
+      >
         <div className="progress-bar-container" style={{ marginTop: '5px', marginBottom: '7px', width: '100%' }}>
           <div
             className="progress-bar"
@@ -92,11 +115,12 @@ const Math = ({ token }) => {
           />
         </div>
         <div className="buttoncontent">
-          <div className='title'>Basic Math</div>
-          <div className='dbtn'>
-            {checkedCount}/{problems.length}
-            <i className={`fas fa-chevron-down ${isOpen ? 'open' : ''}`} />
-          </div>
+        Basic Math
+        <div className='dbtn'>
+          {/* Show checked problems count */}
+          {checkedCount}/{problems.length}
+          <i className={`fas fa-chevron-down ${isOpen ? 'open' : ''}`} />
+        </div>
         </div>
       </button>
       {isOpen && (
@@ -121,7 +145,7 @@ const Math = ({ token }) => {
                           type="checkbox"
                           id={`blind_ques_${problem._id}`}
                           checked={!!checkedProblems[problem._id]} // Pre-fill checkbox if the problem is saved
-                          onChange={() => handleCheckboxClick(user._id, problem._id)} // Add or remove problem from saved list
+                          onChange={() => handleCheckboxClick(user?._id, problem._id)} // Add or remove problem from saved list
                         />
                       </td>
                       <td>{problem.name}</td>

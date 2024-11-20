@@ -4,7 +4,7 @@ export async function getdsa() {
     const response = await axios.get("https://tbackent.vercel.app/api/dsa");
     return response.data;
   } catch (error) {
-    console.error("Error fetching interview posts:", error);
-    throw new Error("Error fetching interview posts");
+    console.error("Error fetching dsa lists:", error);
+    throw new Error("Error fetching dsa lists");
   }
 }

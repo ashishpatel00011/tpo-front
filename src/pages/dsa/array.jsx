@@ -25,16 +25,28 @@ const Array = ({ token }) => {
 
     useEffect(() => {
         async function fetchProblems() {
-            const data = await getdsa(token);
-            const filteredProblems = data.filter((problem) => problem.type === "array");
-            setProblems(filteredProblems);
+            try {
+                const data = await getdsa(token);
+                const filteredProblems = data.filter((problem) => problem.type === "array");
+                setProblems(filteredProblems);
+    
+                // Fetch saved problems after problems are set
+                if (user && user._id) {
+                    await fetchSavedProblems(filteredProblems);
+                } else {
+                    console.warn("User is not logged in. Skipping fetching saved problems.");
+                }
+            } catch (error) {
+                console.error("Error fetching problems:", error);
+            }
         }
     
-        async function fetchSavedProblems() {
+        async function fetchSavedProblems(problems) {
             try {
-                const savedProblems = await getproblemsaved(user._id);    
+                const savedProblems = await getproblemsaved(user._id);
+    
                 // Filter only the saved problems for the current type
-                const filteredSavedProblems = savedProblems.filter((problemId) => 
+                const filteredSavedProblems = savedProblems.filter((problemId) =>
                     problems.some((problem) => problem._id === problemId)
                 );
     
@@ -49,12 +61,19 @@ const Array = ({ token }) => {
             }
         }
     
-        fetchProblems().then(fetchSavedProblems); // Ensure problems are fetched before filtering saved problems
-    }, [token, user._id, problems]);
+        // Start fetching problems
+        fetchProblems();
+    }, [token, user]); // Removed problems from dependency array
     
 
     // Function to handle checkbox click for adding and deleting problems
     const handleCheckboxClick = async (userId, problemId) => {
+        // Check if the user is logged in
+        if (!userId) {
+            alert("Please log in to save or remove problems..............");
+            return; // Exit the function early if the user is not logged in
+        }
+    
         if (checkedProblems[problemId]) {
             try {
                 await Deleteproblem(userId, problemId);
@@ -63,7 +82,7 @@ const Array = ({ token }) => {
                     [problemId]: false,
                 }));
             } catch (error) {
-                console.error('Error deleting problem:', error);
+                console.error("Error deleting problem:", error);
             }
         } else {
             try {
@@ -73,11 +92,10 @@ const Array = ({ token }) => {
                     [problemId]: true,
                 }));
             } catch (error) {
-                console.error('Error adding problem:', error);
+                console.error("Error adding problem:", error);
             }
         }
     };
-
     return (
         <div className="dropdown">
             <button onClick={toggleDropdown} className={`dropbtn ${isOpen ? 'active' : ''}`}>
@@ -122,7 +140,7 @@ const Array = ({ token }) => {
                                                     type="checkbox"
                                                     id={`blind_ques_${problem._id}`}
                                                     checked={!!checkedProblems[problem._id]} // Pre-fill checkbox if the problem is saved
-                                                    onChange={() => handleCheckboxClick(user._id, problem._id)} // Add or remove problem from saved list
+                                                    onChange={() => handleCheckboxClick(user?._id, problem._id)} // Add or remove problem from saved list
                                                 />
 
                                             </td>
